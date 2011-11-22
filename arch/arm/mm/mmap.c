@@ -10,6 +10,7 @@
 #include <linux/personality.h>
 #include <linux/random.h>
 #include <asm/cachetype.h>
+<<<<<<< HEAD
 
 static inline unsigned long COLOUR_ALIGN_DOWN(unsigned long addr,
 					      unsigned long pgoff)
@@ -22,6 +23,8 @@ static inline unsigned long COLOUR_ALIGN_DOWN(unsigned long addr,
 
 	return base - off;
 }
+=======
+>>>>>>> f95a470... ARM: 7168/1: use cache type functions for arch_get_unmapped_area
 
 #define COLOUR_ALIGN(addr,pgoff)		\
 	((((addr)+SHMLBA-1)&~(SHMLBA-1)) +	\
