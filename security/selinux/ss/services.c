@@ -1636,6 +1636,7 @@ static int security_compute_sid(u32 ssid,
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} else {
 		if ((tclass == policydb.process_class) || (sock == true))
 			newcontext.role = scontext->role;
@@ -1648,6 +1649,8 @@ static int security_compute_sid(u32 ssid,
 		newcontext.type = scontext->type;
 	} else if (cladatum && cladatum->default_type == DEFAULT_TARGET) {
 =======
+=======
+>>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======

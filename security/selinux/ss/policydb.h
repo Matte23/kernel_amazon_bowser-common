@@ -63,7 +63,11 @@ struct class_datum {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Options how a new object user, role, and type should be decided */
+=======
+	/* Options how a new object user and role should be decided */
+>>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
 	/* Options how a new object user and role should be decided */
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
@@ -80,7 +84,10 @@ struct class_datum {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	char default_type;
+=======
+>>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
