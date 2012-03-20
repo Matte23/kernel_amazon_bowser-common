@@ -138,6 +138,7 @@ static struct policydb_compat_info policydb_compat[] = {
 		.sym_num	= SYM_NUM,
 		.ocon_num	= OCON_NUM,
 	},
+<<<<<<< HEAD
 	{
 		.version	= POLICYDB_VERSION_DEFAULT_TYPE,
 		.sym_num	= SYM_NUM,
@@ -153,6 +154,8 @@ static struct policydb_compat_info policydb_compat[] = {
 		.sym_num	= SYM_NUM,
 		.ocon_num	= OCON_NUM,
 	},
+=======
+>>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 };
 
 static struct policydb_compat_info *policydb_lookup_compat(int version)
@@ -1390,6 +1393,16 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
 		if (rc)
 			goto bad;
 		cladatum->default_type = le32_to_cpu(buf[0]);
+	}
+
+	if (p->policyvers >= POLICYDB_VERSION_NEW_OBJECT_DEFAULTS) {
+		rc = next_entry(buf, fp, sizeof(u32) * 3);
+		if (rc)
+			goto bad;
+
+		cladatum->default_user = le32_to_cpu(buf[0]);
+		cladatum->default_role = le32_to_cpu(buf[1]);
+		cladatum->default_range = le32_to_cpu(buf[2]);
 	}
 
 	rc = hashtab_insert(h, key, cladatum);
@@ -2966,6 +2979,7 @@ static int class_write(void *vkey, void *datum, void *ptr)
 			return rc;
 	}
 
+<<<<<<< HEAD
 	if (p->policyvers >= POLICYDB_VERSION_DEFAULT_TYPE) {
 		buf[0] = cpu_to_le32(cladatum->default_type);
 		rc = put_entry(buf, sizeof(uint32_t), 1, fp);
@@ -2973,6 +2987,8 @@ static int class_write(void *vkey, void *datum, void *ptr)
 			return rc;
 	}
 
+=======
+>>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 	return 0;
 }
 

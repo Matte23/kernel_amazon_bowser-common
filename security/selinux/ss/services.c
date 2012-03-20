@@ -1633,6 +1633,7 @@ static int security_compute_sid(u32 ssid,
 		newcontext.role = scontext->role;
 	} else if (cladatum && cladatum->default_role == DEFAULT_TARGET) {
 		newcontext.role = tcontext->role;
+<<<<<<< HEAD
 	} else {
 		if ((tclass == policydb.process_class) || (sock == true))
 			newcontext.role = scontext->role;
@@ -1644,6 +1645,21 @@ static int security_compute_sid(u32 ssid,
 	if (cladatum && cladatum->default_type == DEFAULT_SOURCE) {
 		newcontext.type = scontext->type;
 	} else if (cladatum && cladatum->default_type == DEFAULT_TARGET) {
+=======
+	} else {
+		if ((tclass == policydb.process_class) || (sock == true))
+			newcontext.role = scontext->role;
+		else
+			newcontext.role = OBJECT_R_VAL;
+	}
+
+	/* Set the type to default values. */
+	if ((tclass == policydb.process_class) || (sock == true)) {
+		/* Use the type of process. */
+		newcontext.type = scontext->type;
+	} else {
+		/* Use the type of the related object. */
+>>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 		newcontext.type = tcontext->type;
 	} else {
 		if ((tclass == policydb.process_class) || (sock == true)) {
