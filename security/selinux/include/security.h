@@ -34,9 +34,12 @@
 #define POLICYDB_VERSION_NEW_OBJECT_DEFAULTS	27
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define POLICYDB_VERSION_DEFAULT_TYPE	28
 #define POLICYDB_VERSION_CONSTRAINT_NAMES	29
 #define POLICYDB_VERSION_IOCTL_OPERATIONS	30
+=======
+>>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
@@ -49,7 +52,11 @@
 #else
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define POLICYDB_VERSION_MAX	POLICYDB_VERSION_IOCTL_OPERATIONS
+=======
+#define POLICYDB_VERSION_MAX	POLICYDB_VERSION_NEW_OBJECT_DEFAULTS
+>>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
 #define POLICYDB_VERSION_MAX	POLICYDB_VERSION_NEW_OBJECT_DEFAULTS
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
