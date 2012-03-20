@@ -142,11 +142,15 @@ static struct policydb_compat_info policydb_compat[] = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2401576... SELinux: add default_type statements
 	{
 		.version	= POLICYDB_VERSION_DEFAULT_TYPE,
 		.sym_num	= SYM_NUM,
 		.ocon_num	= OCON_NUM,
 	},
+<<<<<<< HEAD
 	{
 		.version	= POLICYDB_VERSION_CONSTRAINT_NAMES,
 		.sym_num	= SYM_NUM,
@@ -165,6 +169,8 @@ static struct policydb_compat_info policydb_compat[] = {
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
+=======
+>>>>>>> 2401576... SELinux: add default_type statements
 };
 
 static struct policydb_compat_info *policydb_lookup_compat(int version)
@@ -1400,6 +1406,9 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2401576... SELinux: add default_type statements
 	if (p->policyvers >= POLICYDB_VERSION_DEFAULT_TYPE) {
 		rc = next_entry(buf, fp, sizeof(u32) * 1);
 		if (rc)
@@ -1407,6 +1416,7 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
 		cladatum->default_type = le32_to_cpu(buf[0]);
 	}
 
+<<<<<<< HEAD
 	if (p->policyvers >= POLICYDB_VERSION_NEW_OBJECT_DEFAULTS) {
 		rc = next_entry(buf, fp, sizeof(u32) * 3);
 		if (rc)
@@ -1423,6 +1433,8 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
+=======
+>>>>>>> 2401576... SELinux: add default_type statements
 	rc = hashtab_insert(h, key, cladatum);
 	if (rc)
 		goto bad;
@@ -3001,6 +3013,9 @@ static int class_write(void *vkey, void *datum, void *ptr)
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2401576... SELinux: add default_type statements
 	if (p->policyvers >= POLICYDB_VERSION_DEFAULT_TYPE) {
 		buf[0] = cpu_to_le32(cladatum->default_type);
 		rc = put_entry(buf, sizeof(uint32_t), 1, fp);
@@ -3008,6 +3023,7 @@ static int class_write(void *vkey, void *datum, void *ptr)
 			return rc;
 	}
 
+<<<<<<< HEAD
 =======
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
@@ -3016,6 +3032,8 @@ static int class_write(void *vkey, void *datum, void *ptr)
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
+=======
+>>>>>>> 2401576... SELinux: add default_type statements
 	return 0;
 }
 
