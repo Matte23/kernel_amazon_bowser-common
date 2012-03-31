@@ -1137,6 +1137,7 @@ int avc_ss_reset(u32 seqno)
  * results in a bigger stack frame.
  */
 static noinline struct avc_node *avc_compute_av(u32 ssid, u32 tsid,
+<<<<<<< HEAD
 			 u16 tclass, struct av_decision *avd,
 			 struct avc_operation_node *ops_node)
 {
@@ -1151,6 +1152,20 @@ static noinline int avc_denied(u32 ssid, u32 tsid,
 				u16 tclass, u32 requested,
 				u16 cmd, unsigned flags,
 				struct av_decision *avd)
+=======
+			 u16 tclass, struct av_decision *avd)
+{
+	rcu_read_unlock();
+	security_compute_av(ssid, tsid, tclass, avd);
+	rcu_read_lock();
+	return avc_insert(ssid, tsid, tclass, avd);
+}
+
+static noinline int avc_denied(u32 ssid, u32 tsid,
+			 u16 tclass, u32 requested,
+			 unsigned flags,
+			 struct av_decision *avd)
+>>>>>>> ad80e29... selinux: don't inline slow-path code into avc_has_perm_noaudit()
 {
 	if (flags & AVC_STRICT)
 		return -EACCES;
@@ -1158,6 +1173,7 @@ static noinline int avc_denied(u32 ssid, u32 tsid,
 	if (selinux_enforcing && !(avd->flags & AVD_FLAGS_PERMISSIVE))
 		return -EACCES;
 
+<<<<<<< HEAD
 	avc_update_node(AVC_CALLBACK_GRANT, requested, cmd, ssid,
 				tsid, tclass, avd->seqno, NULL, flags);
 	return 0;
@@ -1244,6 +1260,13 @@ decision:
 		return rc2;
 	return rc;
 }
+=======
+	avc_update_node(AVC_CALLBACK_GRANT, requested, ssid,
+				tsid, tclass, avd->seqno);
+	return 0;
+}
+
+>>>>>>> ad80e29... selinux: don't inline slow-path code into avc_has_perm_noaudit()
 
 /**
  * avc_has_perm_noaudit - Check permissions but perform no auditing.
@@ -1280,14 +1303,24 @@ inline int avc_has_perm_noaudit(u32 ssid, u32 tsid,
 	rcu_read_lock();
 
 	node = avc_lookup(ssid, tsid, tclass);
+<<<<<<< HEAD
 	if (unlikely(!node))
 		node = avc_compute_av(ssid, tsid, tclass, avd, &ops_node);
 	else
+=======
+	if (unlikely(!node)) {
+		node = avc_compute_av(ssid, tsid, tclass, avd);
+	} else {
+>>>>>>> ad80e29... selinux: don't inline slow-path code into avc_has_perm_noaudit()
 		memcpy(avd, &node->ae.avd, sizeof(*avd));
 
 	denied = requested & ~(avd->allowed);
 	if (unlikely(denied))
+<<<<<<< HEAD
 		rc = avc_denied(ssid, tsid, tclass, requested, 0, flags, avd);
+=======
+		rc = avc_denied(ssid, tsid, tclass, requested, flags, avd);
+>>>>>>> ad80e29... selinux: don't inline slow-path code into avc_has_perm_noaudit()
 
 	rcu_read_unlock();
 	return rc;
