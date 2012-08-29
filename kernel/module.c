@@ -28,6 +28,7 @@
 #include <linux/vmalloc.h>
 #include <linux/elf.h>
 #include <linux/proc_fs.h>
+#include <linux/security.h>
 #include <linux/seq_file.h>
 #include <linux/syscalls.h>
 #include <linux/fcntl.h>
@@ -2289,6 +2290,10 @@ static int copy_and_check(struct load_info *info,
 	if (len < sizeof(*hdr))
 		return -ENOEXEC;
 
+	err = security_kernel_module_from_file(NULL);
+	if (err)
+		return err;
+
 	/* Suck in entire file: we'll want most of it. */
 	if ((hdr = vmalloc(len)) == NULL)
 		return -ENOMEM;
@@ -2306,6 +2311,41 @@ static int copy_and_check(struct load_info *info,
 	    || hdr->e_shentsize != sizeof(Elf_Shdr)) {
 		err = -ENOEXEC;
 		goto free_hdr;
+
+	return err;
+
+free_hdr:
+	vfree(info->hdr);
+	return err;
+}
+
+/* Sets info->hdr and info->len. */
+int copy_module_from_fd(int fd, struct load_info *info)
+{
+	struct file *file;
+	int err;
+	struct kstat stat;
+	unsigned long size;
+	off_t pos;
+	ssize_t bytes = 0;
+
+	file = fget(fd);
+	if (!file)
+		return -ENOEXEC;
+
+	err = vfs_getattr(file->f_vfsmnt, file->f_dentry, &stat);
+	if (err)
+		goto out;
+
+	err = security_kernel_module_from_file(file);
+	if (err)
+		goto out;
+
+	size = stat.size;
+	info->hdr = vmalloc(size);
+	if (!info->hdr) {
+		err = -ENOMEM;
+		goto out;
 	}
 
 	if (len < hdr->e_shoff + hdr->e_shnum * sizeof(Elf_Shdr)) {
