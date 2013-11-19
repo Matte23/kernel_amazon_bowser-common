@@ -151,11 +151,15 @@ static struct policydb_compat_info policydb_compat[] = {
 		.ocon_num	= OCON_NUM,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 672fc3a... SELinux: Update policy version to support constraints info
 	{
 		.version	= POLICYDB_VERSION_CONSTRAINT_NAMES,
 		.sym_num	= SYM_NUM,
 		.ocon_num	= OCON_NUM,
 	},
+<<<<<<< HEAD
 	{
 		.version	= POLICYDB_VERSION_IOCTL_OPERATIONS,
 		.sym_num	= SYM_NUM,
@@ -171,6 +175,8 @@ static struct policydb_compat_info policydb_compat[] = {
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
 >>>>>>> 2401576... SELinux: add default_type statements
+=======
+>>>>>>> 672fc3a... SELinux: Update policy version to support constraints info
 };
 
 static struct policydb_compat_info *policydb_lookup_compat(int version)
