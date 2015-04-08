@@ -160,11 +160,15 @@ static struct policydb_compat_info policydb_compat[] = {
 		.ocon_num	= OCON_NUM,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1739b7d... SELinux: per-command whitelisting of ioctls
 	{
 		.version	= POLICYDB_VERSION_IOCTL_OPERATIONS,
 		.sym_num	= SYM_NUM,
 		.ocon_num	= OCON_NUM,
 	},
+<<<<<<< HEAD
 =======
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
 =======
@@ -177,6 +181,8 @@ static struct policydb_compat_info policydb_compat[] = {
 >>>>>>> 2401576... SELinux: add default_type statements
 =======
 >>>>>>> 672fc3a... SELinux: Update policy version to support constraints info
+=======
+>>>>>>> 1739b7d... SELinux: per-command whitelisting of ioctls
 };
 
 static struct policydb_compat_info *policydb_lookup_compat(int version)

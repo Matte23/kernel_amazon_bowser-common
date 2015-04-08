@@ -40,6 +40,7 @@
 #define POLICYDB_VERSION_DEFAULT_TYPE	28
 #define POLICYDB_VERSION_CONSTRAINT_NAMES	29
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define POLICYDB_VERSION_IOCTL_OPERATIONS	30
 =======
 >>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
@@ -54,12 +55,16 @@
 >>>>>>> 2401576... SELinux: add default_type statements
 =======
 >>>>>>> 672fc3a... SELinux: Update policy version to support constraints info
+=======
+#define POLICYDB_VERSION_IOCTL_OPERATIONS	30
+>>>>>>> 1739b7d... SELinux: per-command whitelisting of ioctls
 
 /* Range of policy versions we understand*/
 #define POLICYDB_VERSION_MIN   POLICYDB_VERSION_BASE
 #ifdef CONFIG_SECURITY_SELINUX_POLICYDB_VERSION_MAX
 #define POLICYDB_VERSION_MAX	CONFIG_SECURITY_SELINUX_POLICYDB_VERSION_MAX_VALUE
 #else
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -85,6 +90,9 @@
 =======
 #define POLICYDB_VERSION_MAX	POLICYDB_VERSION_CONSTRAINT_NAMES
 >>>>>>> 672fc3a... SELinux: Update policy version to support constraints info
+=======
+#define POLICYDB_VERSION_MAX	POLICYDB_VERSION_IOCTL_OPERATIONS
+>>>>>>> 1739b7d... SELinux: per-command whitelisting of ioctls
 #endif
 
 /* Mask for just the mount related flags */

@@ -1004,6 +1004,7 @@ void security_compute_operation(u32 ssid,
 	read_lock(&policy_rwlock);
 	if (!ss_initialized)
 		goto allow;
+<<<<<<< HEAD
 
 	scontext = sidtab_search(&sidtab, ssid);
 	if (!scontext) {
@@ -1019,6 +1020,23 @@ void security_compute_operation(u32 ssid,
 		goto out;
 	}
 
+=======
+
+	scontext = sidtab_search(&sidtab, ssid);
+	if (!scontext) {
+		printk(KERN_ERR "SELinux: %s:  unrecognized SID %d\n",
+		       __func__, ssid);
+		goto out;
+	}
+
+	tcontext = sidtab_search(&sidtab, tsid);
+	if (!tcontext) {
+		printk(KERN_ERR "SELinux: %s:  unrecognized SID %d\n",
+		       __func__, tsid);
+		goto out;
+	}
+
+>>>>>>> 1739b7d... SELinux: per-command whitelisting of ioctls
 	tclass = unmap_class(orig_tclass);
 	if (unlikely(orig_tclass && !tclass)) {
 		if (policydb.allow_unknown)
