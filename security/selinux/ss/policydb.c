@@ -138,51 +138,16 @@ static struct policydb_compat_info policydb_compat[] = {
 		.sym_num	= SYM_NUM,
 		.ocon_num	= OCON_NUM,
 	},
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2401576... SELinux: add default_type statements
 	{
 		.version	= POLICYDB_VERSION_DEFAULT_TYPE,
 		.sym_num	= SYM_NUM,
 		.ocon_num	= OCON_NUM,
 	},
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 672fc3a... SELinux: Update policy version to support constraints info
 	{
 		.version	= POLICYDB_VERSION_CONSTRAINT_NAMES,
 		.sym_num	= SYM_NUM,
 		.ocon_num	= OCON_NUM,
 	},
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 1739b7d... SELinux: per-command whitelisting of ioctls
-	{
-		.version	= POLICYDB_VERSION_IOCTL_OPERATIONS,
-		.sym_num	= SYM_NUM,
-		.ocon_num	= OCON_NUM,
-	},
-<<<<<<< HEAD
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 2401576... SELinux: add default_type statements
-=======
->>>>>>> 672fc3a... SELinux: Update policy version to support constraints info
-=======
->>>>>>> 1739b7d... SELinux: per-command whitelisting of ioctls
 };
 
 static struct policydb_compat_info *policydb_lookup_compat(int version)
@@ -1415,12 +1380,6 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
 		cladatum->default_range = le32_to_cpu(buf[2]);
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2401576... SELinux: add default_type statements
 	if (p->policyvers >= POLICYDB_VERSION_DEFAULT_TYPE) {
 		rc = next_entry(buf, fp, sizeof(u32) * 1);
 		if (rc)
@@ -1428,25 +1387,6 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
 		cladatum->default_type = le32_to_cpu(buf[0]);
 	}
 
-<<<<<<< HEAD
-	if (p->policyvers >= POLICYDB_VERSION_NEW_OBJECT_DEFAULTS) {
-		rc = next_entry(buf, fp, sizeof(u32) * 3);
-		if (rc)
-			goto bad;
-
-		cladatum->default_user = le32_to_cpu(buf[0]);
-		cladatum->default_role = le32_to_cpu(buf[1]);
-		cladatum->default_range = le32_to_cpu(buf[2]);
-	}
-
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 2401576... SELinux: add default_type statements
 	rc = hashtab_insert(h, key, cladatum);
 	if (rc)
 		goto bad;
@@ -2057,19 +1997,7 @@ static int filename_trans_read(struct policydb *p, void *fp)
 		if (rc)
 			goto out;
 
-		rc = hashtab_insert(p->filename_trans, ft, otype);
-		if (rc) {
-			/*
-			 * Do not return -EEXIST to the caller, or the system
-			 * will not boot.
-			 */
-			if (rc != -EEXIST)
-				goto out;
-			/* But free memory to avoid memory leak. */
-			kfree(ft);
-			kfree(name);
-			kfree(otype);
-		}
+		hashtab_insert(p->filename_trans, ft, otype);
 	}
 	hash_eval(p->filename_trans, "filenametr");
 	return 0;
@@ -3021,13 +2949,6 @@ static int class_write(void *vkey, void *datum, void *ptr)
 			return rc;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2401576... SELinux: add default_type statements
 	if (p->policyvers >= POLICYDB_VERSION_DEFAULT_TYPE) {
 		buf[0] = cpu_to_le32(cladatum->default_type);
 		rc = put_entry(buf, sizeof(uint32_t), 1, fp);
@@ -3035,17 +2956,6 @@ static int class_write(void *vkey, void *datum, void *ptr)
 			return rc;
 	}
 
-<<<<<<< HEAD
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 2401576... SELinux: add default_type statements
 	return 0;
 }
 
@@ -3591,3 +3501,4 @@ int policydb_write(struct policydb *p, void *fp)
 
 	return 0;
 }
+

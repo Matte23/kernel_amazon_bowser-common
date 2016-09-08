@@ -32,67 +32,15 @@
 #define POLICYDB_VERSION_FILENAME_TRANS	25
 #define POLICYDB_VERSION_ROLETRANS	26
 #define POLICYDB_VERSION_NEW_OBJECT_DEFAULTS	27
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 #define POLICYDB_VERSION_DEFAULT_TYPE	28
 #define POLICYDB_VERSION_CONSTRAINT_NAMES	29
-<<<<<<< HEAD
-<<<<<<< HEAD
-#define POLICYDB_VERSION_IOCTL_OPERATIONS	30
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
-#define POLICYDB_VERSION_DEFAULT_TYPE	28
->>>>>>> 2401576... SELinux: add default_type statements
-=======
->>>>>>> 672fc3a... SELinux: Update policy version to support constraints info
-=======
-#define POLICYDB_VERSION_IOCTL_OPERATIONS	30
->>>>>>> 1739b7d... SELinux: per-command whitelisting of ioctls
 
 /* Range of policy versions we understand*/
 #define POLICYDB_VERSION_MIN   POLICYDB_VERSION_BASE
 #ifdef CONFIG_SECURITY_SELINUX_POLICYDB_VERSION_MAX
 #define POLICYDB_VERSION_MAX	CONFIG_SECURITY_SELINUX_POLICYDB_VERSION_MAX_VALUE
 #else
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-#define POLICYDB_VERSION_MAX	POLICYDB_VERSION_IOCTL_OPERATIONS
-=======
-#define POLICYDB_VERSION_MAX	POLICYDB_VERSION_NEW_OBJECT_DEFAULTS
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
-#define POLICYDB_VERSION_MAX	POLICYDB_VERSION_NEW_OBJECT_DEFAULTS
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
-#define POLICYDB_VERSION_MAX	POLICYDB_VERSION_NEW_OBJECT_DEFAULTS
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
-#define POLICYDB_VERSION_MAX	POLICYDB_VERSION_NEW_OBJECT_DEFAULTS
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
-#define POLICYDB_VERSION_MAX	POLICYDB_VERSION_DEFAULT_TYPE
->>>>>>> 2401576... SELinux: add default_type statements
-=======
 #define POLICYDB_VERSION_MAX	POLICYDB_VERSION_CONSTRAINT_NAMES
->>>>>>> 672fc3a... SELinux: Update policy version to support constraints info
-=======
-#define POLICYDB_VERSION_MAX	POLICYDB_VERSION_IOCTL_OPERATIONS
->>>>>>> 1739b7d... SELinux: per-command whitelisting of ioctls
 #endif
 
 /* Mask for just the mount related flags */
@@ -155,40 +103,11 @@ struct av_decision {
 	u32 flags;
 };
 
-#define security_operation_set(perms, x) (perms[x >> 5] |= 1 << (x & 0x1f))
-#define security_operation_test(perms, x) (1 & (perms[x >> 5] >> (x & 0x1f)))
-
-struct operation_perm {
-	u32 perms[8];
-};
-
-struct operation_decision {
-	u8 type;
-	u8 specified;
-	struct operation_perm *allowed;
-	struct operation_perm *auditallow;
-	struct operation_perm *dontaudit;
-};
-
-#define OPERATION_ALLOWED 1
-#define OPERATION_AUDITALLOW 2
-#define OPERATION_DONTAUDIT 4
-#define OPERATION_ALL (OPERATION_ALLOWED | OPERATION_AUDITALLOW |\
-			OPERATION_DONTAUDIT)
-struct operation {
-	u16 len;	/* length of operation decision chain */
-	u32 type[8];	/* 256 types */
-};
-
 /* definitions of av_decision.flags */
 #define AVD_FLAGS_PERMISSIVE	0x0001
 
 void security_compute_av(u32 ssid, u32 tsid,
-			 u16 tclass, struct av_decision *avd,
-			 struct operation *ops);
-
-void security_compute_operation(u32 ssid, u32 tsid, u16 tclass,
-			 u8 type, struct operation_decision *od);
+			 u16 tclass, struct av_decision *avd);
 
 void security_compute_av_user(u32 ssid, u32 tsid,
 			     u16 tclass, struct av_decision *avd);
@@ -302,4 +221,5 @@ extern void selinux_status_update_setenforce(int enforcing);
 extern void selinux_status_update_policyload(int seqno);
 
 #endif /* _SELINUX_SECURITY_H_ */
+
 
