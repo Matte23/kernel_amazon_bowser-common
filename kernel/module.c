@@ -2348,17 +2348,27 @@ int copy_module_from_fd(int fd, struct load_info *info)
 		goto out;
 	}
 
-	if (len < hdr->e_shoff + hdr->e_shnum * sizeof(Elf_Shdr)) {
-		err = -ENOEXEC;
-		goto free_hdr;
+	pos = 0;
+	while (pos < size) {
+		bytes = kernel_read(file, pos, (char *)(info->hdr) + pos,
+				    size - pos);
+		if (bytes < 0) {
+			vfree(info->hdr);
+			err = bytes;
+			goto out;
+		}
+		if (bytes == 0)
+			break;
+		pos += bytes;
 	}
+	info->len = pos;
 
-	info->hdr = hdr;
-	info->len = len;
-	return 0;
+	err = check_info(info);
+	if (err)
+		vfree(info->hdr);
 
-free_hdr:
-	vfree(hdr);
+out:
+	fput(file);
 	return err;
 }
 
