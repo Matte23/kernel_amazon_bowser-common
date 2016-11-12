@@ -60,48 +60,12 @@ struct class_datum {
 	struct symtab permissions;	/* class-specific permission symbol table */
 	struct constraint_node *constraints;	/* constraints on class permissions */
 	struct constraint_node *validatetrans;	/* special transition rules */
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 /* Options how a new object user, role, and type should be decided */
-=======
-	/* Options how a new object user and role should be decided */
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
-	/* Options how a new object user and role should be decided */
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
-	/* Options how a new object user and role should be decided */
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
-	/* Options how a new object user and role should be decided */
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
-/* Options how a new object user, role, and type should be decided */
->>>>>>> 2401576... SELinux: add default_type statements
 #define DEFAULT_SOURCE         1
 #define DEFAULT_TARGET         2
 	char default_user;
 	char default_role;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 	char default_type;
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
->>>>>>> 5e624b6... SELinux: allow default source/target selectors for user/role/range
-=======
-	char default_type;
->>>>>>> 2401576... SELinux: add default_type statements
 /* Options how a new object range should be decided */
 #define DEFAULT_SOURCE_LOW     1
 #define DEFAULT_SOURCE_HIGH    2
@@ -403,4 +367,5 @@ extern u16 string_to_security_class(struct policydb *p, const char *name);
 extern u32 string_to_av_perm(struct policydb *p, u16 tclass, const char *name);
 
 #endif	/* _SS_POLICYDB_H_ */
+
 
