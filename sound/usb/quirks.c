@@ -131,9 +131,13 @@ static int create_fixed_stream_quirk(struct snd_usb_audio *chip,
 	unsigned *rate_table = NULL;
 
 	fp = kmemdup(quirk->data, sizeof(*fp), GFP_KERNEL);
-	if (! fp) {
+	if (!fp) {
 		snd_printk(KERN_ERR "cannot memdup\n");
 		return -ENOMEM;
+	}
+	if (fp->nr_rates > MAX_NR_RATES) {
+		kfree(fp);
+		return -EINVAL;
 	}
 	INIT_LIST_HEAD(&fp->list);
 	if (fp->nr_rates > 0) {
@@ -465,7 +469,7 @@ static int snd_usb_nativeinstruments_boot_quirk(struct usb_device *dev)
 {
 	int ret = usb_control_msg(dev, usb_sndctrlpipe(dev, 0),
 				  0xaf, USB_TYPE_VENDOR | USB_RECIP_DEVICE,
-				  cpu_to_le16(1), 0, NULL, 0, 1000);
+				  1, 0, NULL, 0, 1000);
 
 	if (ret < 0)
 		return ret;
@@ -656,5 +660,4 @@ void snd_usb_set_format_quirk(struct snd_usb_substream *subs,
 		break;
 	}
 }
-
 
